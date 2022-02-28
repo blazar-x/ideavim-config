@@ -1,4 +1,7 @@
 "==================基础配置==============================
+" '': 在前一次跳转位置与当前位置间切换
+" '.: 跳转到之前修改的位置
+"==================基础配置==============================
 set hlsearch      "搜索逐字符高亮
 set incsearch     "在输入要搜索的文字时，vim会实时匹配
 set ignorecase    "设置忽略大小写
@@ -7,19 +10,29 @@ set smartcase     "设置智能匹配大小写，当ignorecase为开启时才生
 set nobackup      "从不备份
 set noswapfile    "禁止缓存文件生成
 
-set number          "显示行号
-"set relativenumber "显示相对行号
+"set number          "显示行号
+set relativenumber "显示相对行号
 set ruler           "显示光标当前位置
 set wrap            "字不超过窗口，自动折行
 set clipboard^=unnamed,unnamedplus "共享系统剪切板，可跨平台
 
 "插件配置
 set easymotion             "开启简单跳转插件 <leader><leader>s启用搜索字符
+"多指针操作
+set multiple-cursors
+" 启用vim环绕功能"
+set surround
 "set keep-english-in-normal "回到正常模式时自动切换为英文输入法
+
+" 屏幕滚动时在光标上下方保留10行预览代码
+set so=10
 
 "==================insert模式映射==============================
 "jk回到正常模式
 inoremap jk <ESC>
+inoremap JK <ESC>
+inoremap jj <ESC>
+inoremap kk <ESC>
 "映射方向键
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
@@ -27,16 +40,17 @@ inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
 "新建一行并添加注释
-map = o//<space>
-
+" map = o//<space>
 "==================normal模式映射==============================
 "
+nnoremap <C-j> <Down>
+nnoremap <C-k> <Up>
 let mapleader = '\<space>'
 "复制到行尾
 nnoremap Y y$
 " 跳转到上个位置/下个位置
-nnoremap <Leader>h <C-o>
-nnoremap <Leader>l <C-i>
+" nnoremap <Leader>h <C-o>
+" nnoremap <Leader>l <C-i>
 " git
 nnoremap <leader>sb :action Git.Commit.Stage<CR>
 nnoremap <leader>ps :action Git.Commit.And.Push.Executor<CR>
@@ -44,9 +58,9 @@ nnoremap <leader>up :action Git.Rebase<CR>
 
 "标签页操作
 "向下切换标签页
-nnoremap K gt
+" nnoremap L gt
 "向上切换标签页
-nnoremap J gT
+" nnoremap H gT
 "关闭标签页
 nnoremap <Leader>wc <C-W>v
 "向右分隔标签
@@ -70,8 +84,10 @@ nnoremap <Leader>ga :action GotoAction<CR>
 nnoremap gf :action GotoFile<CR>
 "跳转到实现处
 nnoremap gi :action GotoImplementation<CR>
+nnoremap ]] :action GotoImplementation<CR>
 "跳转到定义处
 nnoremap gd :action GotoDeclaration<CR>
+nnoremap [[ :action GotoDeclaration<CR>
 "根据方法推断返回类型，并生成默认变量
 nnoremap gv :action IntroduceVariable<CR>
 " 整理格式
@@ -87,8 +103,8 @@ nnoremap <Leader>se :action SearchEverywhere<CR>
 "重新运行
 nnoremap <Leader>rr :action Rerun<CR>
 "关闭当前活动标签
-nnoremap <Leader>tc :action CloseActiveTab<CR>
-"重命名元素
+"nnoremap <Leader>tc :action CloseActiveTab<CR>
+"快捷环绕操作元素
 nnoremap <Leader>sw :action SurroundWith<CR>
 
 "==================visual模式映射==============================
@@ -99,7 +115,9 @@ vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
 vnoremap <Leader>cc :action CommentByLineComment<CR>
 
 " 快速跳转
+" 向下滚动半页"
 vnoremap <Leader>j <C-d>
+" 向上滚动半页
 vnoremap <Leader>k <C-u>
 
 set clipboard+=ideaput
