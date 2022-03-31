@@ -1,89 +1,78 @@
 "==================基础配置==============================
 " '': 在前一次跳转位置与当前位置间切换
 " '.: 跳转到之前修改的位置
-"==================基础配置==============================
+" <C-a>: 对选中的数字增加1 <C-x>: 对选中的数字减1j 80<C-a>对选中的数字加80
+
+"基础配置--------------------------
 set hlsearch      "搜索逐字符高亮
 set incsearch     "在输入要搜索的文字时，vim会实时匹配
 set ignorecase    "设置忽略大小写
-set smartcase     "设置智能匹配大小写，当ignorecase为开启时才生效
+set smartcase     "设置智能匹配大小写，当ignorecase为开启
 
 set nobackup      "从不备份
 set noswapfile    "禁止缓存文件生成
-
 "set number          "显示行号
 set relativenumber "显示相对行号
-set ruler           "显示光标当前位置
 set wrap            "字不超过窗口，自动折行
 set clipboard^=unnamed,unnamedplus "共享系统剪切板，可跨平台
-
-"插件配置
-set easymotion             "开启简单跳转插件 <leader><leader>s启用搜索字符
-"多指针操作
-set multiple-cursors
-" 启用vim环绕功能"
-set surround
-"set keep-english-in-normal "回到正常模式时自动切换为英文输入法
-
 " 屏幕滚动时在光标上下方保留10行预览代码
 set so=10
+
+"插件配置--------------------------
+"开启简单跳转插件 <leader><leader>s启用搜索字符
+set easymotion
+"多光标操作
+set multiple-cursors
+" 启用vim环绕功能 ds cs ys
+set surround
+" 交换两个文本 cxiw cxiw 交换两个单词"
+set exchange
+" 开启注释插件gcc注释一行"
+set commentary
+" 开启文件树
+set NERDTree
 
 "==================insert模式映射==============================
 "jk回到正常模式
 inoremap jk <ESC>
-inoremap JK <ESC>
-inoremap jj <ESC>
-inoremap kk <ESC>
 "映射方向键
 inoremap <C-h> <Left>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-l> <Right>
 
-"新建一行并添加注释
-" map = o//<space>
 "==================normal模式映射==============================
-"
-nnoremap <C-j> <Down>
-nnoremap <C-k> <Up>
-let mapleader = '\<space>'
+"设置引导键"
+let mapleader =" "
+
+" 这俩键太难按了，映射为vim的j左右大写"
+map H ^
+map L $
+"使用vim的搜索，不使用idea的
+nnoremap / /
+"取消高亮"
+nnoremap nl :nohlsearch<CR>
 "复制到行尾
 nnoremap Y y$
-" 跳转到上个位置/下个位置
-" nnoremap <Leader>h <C-o>
-" nnoremap <Leader>l <C-i>
-" git
-nnoremap <leader>sb :action Git.Commit.Stage<CR>
-nnoremap <leader>ps :action Git.Commit.And.Push.Executor<CR>
-nnoremap <leader>up :action Git.Rebase<CR>
 
 "标签页操作
-"向下切换标签页
-" nnoremap L gt
-"向上切换标签页
-" nnoremap H gT
-"关闭标签页
-nnoremap <Leader>wc <C-W>v
-"向右分隔标签
-nnoremap <Leader>wr <C-W>v
-
-"向上滚动半页
-nnoremap <Leader>k <C-u>
-"向下滚动半页
-nnoremap <Leader>j <C-d>
-
-"Idea action 配置
-nnoremap / :action Find<CR>
-nnoremap <Leader>/ /
-nnoremap <Leader>;; :action CommentByLineComment<CR>
-
+"向左j切换标签页
+nnoremap <C-.> gt
+"向右切换标签页
+nnoremap <C-,> gT
+"关闭当前标签页
+nnoremap <C-q> :q<CR>
+"上移或者下移的时候自动滚动到屏幕中央"
+nnoremap j jzz
+nnoremap k kzz
 "注释当前行
 nnoremap ;; :action CommentByLineComment<CR>
 " 创建动作
-nnoremap <Leader>ga :action GotoAction<CR>
+nnoremap ga :action GotoAction<CR>
 "跳转到文件
 nnoremap gf :action GotoFile<CR>
 "跳转到实现处
-nnoremap gi :action GotoImplementation<CR>
+nnoremap gi :action: GotoImplementation<CR>
 nnoremap ]] :action GotoImplementation<CR>
 "跳转到定义处
 nnoremap gd :action GotoDeclaration<CR>
@@ -96,29 +85,24 @@ nnoremap ff :action ReformatCode<CR>
 nnoremap ej :action GotoNextError<CR>
 " 跳转到上一个错误
 nnoremap ek :action GotoPreviousError<CR>
+" 打开终端
+nnoremap tl :action ActivateTerminalToolWindow<CR>
 "重命名当前文件
 nnoremap <Leader>rf :action RenameFile<CR>
 "全局搜索
 nnoremap <Leader>se :action SearchEverywhere<CR>
 "重新运行
 nnoremap <Leader>rr :action Rerun<CR>
-"关闭当前活动标签
-"nnoremap <Leader>tc :action CloseActiveTab<CR>
 "快捷环绕操作元素
 nnoremap <Leader>sw :action SurroundWith<CR>
 
+
 "==================visual模式映射==============================
 " 打开终端
-vnoremap <Leader>tl y<CR>:action ActivateTerminalToolWindow<CR>
+vnoremap <Leader>md:action ActivateTerminalToolWindow<CR>
 
 " 注释
 vnoremap <Leader>cc :action CommentByLineComment<CR>
-
-" 快速跳转
-" 向下滚动半页"
-vnoremap <Leader>j <C-d>
-" 向上滚动半页
-vnoremap <Leader>k <C-u>
 
 set clipboard+=ideaput
 
