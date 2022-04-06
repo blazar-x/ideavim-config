@@ -11,8 +11,8 @@ set smartcase     "设置智能匹配大小写，当ignorecase为开启
 
 set nobackup      "从不备份
 set noswapfile    "禁止缓存文件生成
-"set number          "显示行号
-set relativenumber "显示相对行号
+set number          "显示行号
+"set relativenumber "显示相对行号
 set wrap            "字不超过窗口，自动折行
 set clipboard^=unnamed,unnamedplus "共享系统剪切板，可跨平台
 " 屏幕滚动时在光标上下方保留10行预览代码
@@ -37,12 +37,6 @@ set NERDTree
 "==================insert模式映射==============================
 "jk回到正常模式
 inoremap jk <ESC>
-"映射方向键
-inoremap <C-h> <Left>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-l> <Right>
-
 "==================normal模式映射==============================
 "设置引导键"
 let mapleader =" "
@@ -50,8 +44,6 @@ let mapleader =" "
 " 这俩键太难按了，映射为vim的j左右大写"
 map H ^
 map L $
-"使用vim的搜索，不使用idea的
-nnoremap / /
 "取消高亮"
 nnoremap nl :nohlsearch<CR>
 "复制到行尾
@@ -68,46 +60,3 @@ nnoremap <C-q> :q<CR>
 "上移或者下移的时候自动滚动到屏幕中央"
 nnoremap j jzz
 nnoremap k kzz
-"注释当前行
-nnoremap ;; :action CommentByLineComment<CR>
-" 创建动作
-nnoremap ga :action GotoAction<CR>
-"跳转到文件
-nnoremap gf :action GotoFile<CR>
-"跳转到实现处
-nnoremap gi :action: GotoImplementation<CR>
-nnoremap ]] :action GotoImplementation<CR>
-"跳转到定义处
-nnoremap gd :action GotoDeclaration<CR>
-nnoremap [[ :action GotoDeclaration<CR>
-"根据方法推断返回类型，并生成默认变量
-nnoremap gv :action IntroduceVariable<CR>
-" 整理格式
-nnoremap ff :action ReformatCode<CR>
-" 跳转到下一个错误
-nnoremap ej :action GotoNextError<CR>
-" 跳转到上一个错误
-nnoremap ek :action GotoPreviousError<CR>
-" 打开终端
-nnoremap tl :action ActivateTerminalToolWindow<CR>
-"重命名当前文件
-nnoremap <Leader>rf :action RenameFile<CR>
-"全局搜索
-nnoremap <Leader>se :action SearchEverywhere<CR>
-"重新运行
-nnoremap <Leader>rr :action Rerun<CR>
-"快捷环绕操作元素
-nnoremap <Leader>sw :action SurroundWith<CR>
-
-
-"==================visual模式映射==============================
-" 打开终端
-vnoremap <Leader>md:action ActivateTerminalToolWindow<CR>
-
-" 注释
-vnoremap <Leader>cc :action CommentByLineComment<CR>
-
-set clipboard+=ideaput
-
-" Quit visual mode
-vnoremap v <Esc>
